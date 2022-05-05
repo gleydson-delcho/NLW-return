@@ -1,6 +1,7 @@
-import { ArrowLeft, Camera } from "phosphor-react";
+import { ArrowLeft } from "phosphor-react";
 import { FormEvent, useState } from "react";
 import { FeedbackType, feedbackTypes } from "..";
+import { api } from "../../../api/api";
 import CloseButton from "../../CloseButton";
 import { ScreenshotButton } from "../../ScreenshotButton";
 
@@ -22,8 +23,17 @@ const FeedbackContentStep = ({
 
   function handleSubmitFeedback(event: FormEvent) {
     event.preventDefault();
-    console.log(screenshot, comment)
-    onFeedbackSent()
+    const feedbacks = {
+      type: feedbackType,
+      comment,
+      screenshot,
+    }
+    if(feedbacks) {
+      api.post('/feedbacks',  feedbacks);
+      onFeedbackSent()
+    }else{
+      console.log("Oops! Algo deu errado!")
+    }
   }
   return (
     <>
