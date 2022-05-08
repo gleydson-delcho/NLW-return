@@ -7,7 +7,8 @@ const port = process.env.PORT || 3333;
 
 app
   .use(cors({
-    origin: 'http://localhost:3000'
+    origin: 'https://nlw-return-production-2d55.up.railway.app/', 
+
   }))
   .use(express.json())
   .use(routes)
